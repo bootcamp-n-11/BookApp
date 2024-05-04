@@ -1,1 +1,26 @@
-{}
+[
+    {
+        "id": 1,
+        "image_link": "url needed here",
+        "fullname": "first",
+        "born": "1970-02-01",
+        "dead": "1990-01-02",
+        "description": "avaria"
+    },
+    {
+        "id": 2,
+        "image_link": "url needed here",
+        "fullname": "first",
+        "born": "1970-02-01",
+        "dead": "1990-01-02",
+        "description": "avaria"
+    },
+    {
+        "id": 3,
+        "image_link": "url needed here",
+        "fullname": "first",
+        "born": "1970-02-01",
+        "dead": "1990-01-02",
+        "description": "avaria"
+    }
+]
