@@ -52,7 +52,7 @@ export function editBook(req, res) {
 
 export function deleteBook(req, res) {
   try {
-    const bookID = req.params.id;
+    const userID = req.params.id;
     fs.readFile(myPath, "utf-8", (err, data) => {
       if (err) {
         console.log(err);
