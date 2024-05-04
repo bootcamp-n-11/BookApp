@@ -1,0 +1,34 @@
+[
+    {
+        "id":1,
+        "name":"Sariq devni minib",
+        "title":"Badiiy asar",
+        "author":"Xudoyberdi To'xtaboyev",
+        "year":2015,
+        "price":35000
+    },
+    {
+        "id":2,
+        "name":"Sherlok Xolms",
+        "title":"detektiv",
+        "author":"Conan Doyle",
+        "year":1460,
+        "price":45000
+    },    
+    {
+        "id":3,
+        "name":"Qora ajdarho yulduzi",
+        "title":"Badiiy asar",
+        "author":"Anna Jeyn",
+        "year":2013,
+        "price":90000
+    },    
+    {
+        "id":1,
+        "name":"Sariq devni minib",
+        "title":"Badiiy asar",
+        "author":"Xudoyberdi To'xtaboyev",
+        "year":2015,
+        "price":35000
+    }
+]
