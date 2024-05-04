@@ -1,10 +1,10 @@
 import { Router } from "express";
-import { appendBook, getAllBooks, getOneBooks } from "../controllers/book.controller.js";
+import {getAllBooks, getOneBooks ,appendBook } from "../controllers/book.controller.js";
 
 const router = Router();
 
-router.get("/books", getAllBooks);
-router.get("/books/:id",getOneBooks)
-router.post("/books",appendBook)
+router.get("/", getAllBooks);
+router.get("/:id",getOneBooks)
+router.post("/",appendBook)
 
 export default router;

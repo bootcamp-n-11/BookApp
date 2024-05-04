@@ -1,47 +1,91 @@
-books=[
-  {
-    id:1,
-    title:"Diqqat",
-    author:"Kel Nyuport",
-    year:2010
-  }
-]
+import fs from "fs"
+import path from "path"
+
 
 export const getAllBooks=(req, res)=>{
-  res.send(books)
+  const filePath=path.join(process.cwd(),'db','books.json')
+  fs.readFile(filePath,"utf8",(err,data)=>{
+    if (err) throw err;
+    else{
+      res.status(200).json({
+        status:"OK",
+        content: JSON.parse(data)
+      })
+    }
+  })
 }
 
 export const getOneBooks=(req,res)=>{
-  const id=+req.params.id
-  const book=books.find(item=>id === item.id)
-  if (!book){
-    res.send('Something error')
-    res.end()
-  }
-  res.status(200).json({
-    status:"OK",
-    data:book
+  const filePath=path.join(process.cwd(),'db','books.json')
+  fs.readFile(filePath,"utf8",(err,data)=>{
+    if (err) throw err;
+    else{
+      try {
+        const json=JSON.parse(data)
+
+        const id=+req.params.id
+        const book=json.find(item=>id === item.id)
+
+        if (!book){
+          res.send('Something error')
+        }
+        res.status(200).json({
+          status:"OK",
+          data:book
+        })
+      } catch (error) {
+        res.status(500).json({
+          status:"Json ma'lumotlarini o'qishda xatolik"
+        })
+      }
+    }
   })
+  
+  
+  
 }
 
 export const appendBook=(req,res)=>{
-  const {title,author,year}=req.body
+  
+  const filePath=path.join(process.cwd(),'db','books.json')
+  fs.readFile(filePath,"utf8",(err,content)=>{
+    if (err) throw err;
 
-  if (!title || !author || !year){
-    res.status(404).json({
-      status:"NOT FOUND"
-    })
-  }
+    try {
+      const json=JSON.parse(content)
 
-  const book={
-    id:books.length+1,
-    title:title,
-    author:author,
-    year:year
-  }
+      const {title,author,year}=req.body
 
-  books.push(book)
-  res.status(201).json({
-    status:"Sucessfull"
-  })
+      if (!title || !author || !year){
+        res.status(404).json({
+          status:"Barcha ma'lumotlar kiritilmagan"
+        })
+        return;
+      }
+
+      const book={
+        id:json.length+1,
+        title:title,
+        author:author,
+        year:year
+      };
+
+      json.push(book)
+
+      fs.writeFile(filePath,JSON.stringify(json),'utf8',err=>{
+        if(err) throw err;
+        else{
+          res.status(200).json({
+            status:"Muaffaqiyatli qo'shildi",
+    
+          })
+        }
+      })
+    }
+      catch (error) {
+      console.log('You have wrong');
+      res.status(500).json({ status: "error", message: "Noma'lum xato yuz berdi" });
+    }
+})
+
 }
