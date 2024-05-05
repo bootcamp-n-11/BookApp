@@ -72,7 +72,7 @@ export function getOneAdmin(req, res) {
                 } else {
                     console.log(err)
                     res.status(404).send({
-                        status: "Admin to'pilmadi"
+                        status: "Admin topilmadi"
                     })
                 }
 
@@ -98,13 +98,26 @@ export function createAdmin(req, res) {
             fs.readFile('./db/admin.json', 'utf8', (err, data) => {
                 if (err) { throw (err) }
                 data = JSON.parse(data)
-                let newAdmin = { "id": data.length + 1, ...req.body }
+                let newAdmin = {
+                    id:data.length+1,
+                    fullname : req.body.fullname,
+                    username : req.body.username,
+                    age : req.body.age,
+                    gmail : req.body.gmail,
+                    password : req.body.password,
+                    birth_year: req.body.birth_year
+                }
+
 
                 data.push(newAdmin)
                 data = JSON.stringify(data)
-                fs.writeFileSync('./db.admin.json', data, err => {
-                    if (err) { throw (err) }
+                fs.writeFileSync('./db/admin.json', data, err => {
+                    if (err) { throw data }
+                    else {
+                        console.log("Malumotlar o'zgartildi")
+                    }
                 })
+                
                 data = JSON.parse(data)
 
                 res.status(201).json({
